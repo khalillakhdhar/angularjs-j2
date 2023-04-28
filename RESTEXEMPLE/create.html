@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <title>AngularJS Add Post Example</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <style>
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input, textarea {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      padding: 10px;
+    }
+  </style>
+  <script>
+    var app = angular.module('myApp', []);
+    app.controller('MyController', function($scope, $http) {
+      $scope.newPost = {};
+
+      $scope.addPost = function() {
+        $http.post('https://jsonplaceholder.typicode.com/posts', $scope.newPost)
+          .then(function(response) {
+            alert('Post added successfully!');
+            console.log(response.data);
+            $scope.newPost = {};
+          }, function(error) {
+            alert('An error occurred while adding the post.');
+            console.error(error);
+          });
+      };
+    });
+  </script>
+</head>
+<body ng-controller="MyController">
+  <h1>Add Post</h1>
+  <form>
+    <label>Title:</label>
+    <input type="text" ng-model="newPost.title" required>
+
+    <label>Body:</label>
+    <textarea ng-model="newPost.body" required></textarea>
+
+    <label>User ID:</label>
+    <input type="number" ng-model="newPost.userId" required>
+
+    <button type="button" ng-click="addPost()">Add Post</button>
+  </form>
+</body>
+</html>

@@ -26,12 +26,13 @@
           $scope.isPrimeNumber = false;
       
           $scope.isPrime = function() {
-            if ($scope.number < 2) {
+            let nb=$scope.number;
+            if (nb < 2) {
               $scope.isPrimeNumber = false;
             } else {
               var isPrime = true;
-              for (var i = 2; i < $scope.number; i++) {
-                if ($scope.number % i === 0) {
+              for (var i = 2; i < nb; i++) {
+                if (nb % i === 0) {
                   isPrime = false;
                   break;
                 }

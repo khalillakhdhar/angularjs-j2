@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--importation angularjs-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <label for="numberInput">Entrer un nombre :</label>
+        <input type="number" id="numberInput" ng-model="number" />
+      
+        <button ng-click="isPrime()">Vérifier</button>
+      
+        <p ng-if="isNumberChecked">{{ number }} est {{ isPrimeNumber ? '' : 'non ' }}premier</p>
+      </div>
+      
+      <script>
+        var app = angular.module("myApp", []);
+      
+        app.controller("myCtrl", function($scope) {
+          $scope.isNumberChecked = false;
+          $scope.isPrimeNumber = false;
+      
+          $scope.isPrime = function() {
+            if ($scope.number < 2) {
+              $scope.isPrimeNumber = false;
+            } else {
+              var isPrime = true;
+              for (var i = 2; i < $scope.number; i++) {
+                if ($scope.number % i === 0) {
+                  isPrime = false;
+                  break;
+                }
+              }
+              $scope.isPrimeNumber = isPrime;
+            }
+      
+            $scope.isNumberChecked = true;
+          };
+        });
+      </script>
+      
+    
+</body>
+</html>

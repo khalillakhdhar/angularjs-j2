@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+  <meta charset="utf-8">
+  <title>Calcul du PGCD avec AngularJS</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="myCtrl">
+  <h2>Calcul du PGCD</h2>
+
+  <label for="number1">Premier nombre :</label>
+  <input type="number" id="number1" ng-model="number1">
+
+  <label for="number2">Deuxième nombre :</label>
+  <input type="number" id="number2" ng-model="number2">
+
+  <button ng-click="calculatePGCD()">Calculer le PGCD</button>
+
+  <p ng-if="pgcd">Le PGCD de {{number1}} et {{number2}} est : {{pgcd}}</p>
+
+  <script>
+    var app = angular.module('myApp', []);
+
+    app.controller('myCtrl', function($scope) {
+      $scope.calculatePGCD = function() {
+        var a = $scope.number1;
+        var b = $scope.number2;
+        while (b !== 0) {
+          var t = b;
+          b = a % b;
+          a = t;
+        }
+        $scope.pgcd = a;
+      };
+    });
+  </script>
+</body>
+
+</html>
